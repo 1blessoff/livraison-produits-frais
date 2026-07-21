@@ -1,0 +1,72 @@
+# ============================================
+# EMMA+ - Sécurité et URLs propres
+# ============================================
+
+RewriteEngine On
+
+# ============================================
+# BLOQUER L'ACCÈS AUX DOSSIERS SENSIBLES
+# ============================================
+RewriteRule ^config/.*$ - [F,L]
+RewriteRule ^includes/.*$ - [F,L]
+RewriteRule ^tmp/.*$ - [F,L]
+# RewriteRule ^uploads/.*$ - [F,L]
+
+
+# ============================================
+# PAGE D'ERREUR PERSONNALISÉE
+# ============================================
+ErrorDocument 403 /403.php
+
+
+# BLOQUER L'ACCÈS DIRECT AUX PAGES ADMIN & CLIENT
+# MAIS AUTORISER SI CONNECTÉ
+
+
+# VOICI LA BONNE APPROCHE :
+
+#  Option 1 : Rediriger vers la page de connexion 
+# si quelqu'un tente d'accéder directement a admin
+RewriteCond %{REQUEST_URI} ^/views/admin/ [NC]
+RewriteCond %{HTTP_COOKIE} !PHPSESSID [NC]
+RewriteRule ^.*$ /403.php [L,R=302]
+
+# si quelqu'un tente d'accéder directement a client
+RewriteCond %{REQUEST_URI} ^/views/client/ [NC]
+RewriteCond %{HTTP_COOKIE} !PHPSESSID [NC]
+RewriteRule ^.*$ /403.php [L,R=302]
+
+# si quelqu'un tente d'accéder directement a livreur
+RewriteCond %{REQUEST_URI} ^/views/livreur/ [NC]
+RewriteCond %{HTTP_COOKIE} !PHPSESSID [NC]
+RewriteRule ^.*$ /403.php [L,R=302]
+
+
+
+
+
+# ============================================
+# EMPÊCHER LE LISTAGE DES DOSSIERS
+# ============================================
+Options -Indexes
+
+# ============================================
+# URLs PROPRES POUR LES PRODUITS
+# ============================================
+RewriteRule ^produit/([a-z0-9-]+)$ views/public/produit.php?slug=$1 [L,QSA]
+
+# ============================================
+# PROTECTION DES FICHIERS CRITIQUES
+# ============================================
+<FilesMatch "\.(env|ini|log|sql|sqlite|db)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ============================================
+# PROTECTION DU FICHIER .HTACCESS
+# ============================================
+<Files ".htaccess">
+    Order allow,deny
+    Deny from all
+</Files>
