@@ -1,9 +1,9 @@
 #  EMMA+ — Le Marché en Ligne
 
 ![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?style=for-the-badge&logo=php&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![Site](https://www.http://panierchrist.lovestoblog.com/)
 
 > **EMMA+** est une plateforme e-commerce conviviale et moderne spécialisée dans la vente de produits vivriers frais et de paniers maraîchers livrés à domicile à Pointe-Noire.
 
@@ -41,7 +41,3 @@
 * **Packaging Desktop (optionnel) :** Nativefier (Electron wrapper)
 
 ---
-
-│       ├── produit.php    # Détails d'un produit (slug/id)
-│       └── panier.php     # Page de gestion du panier d'achat
-└── index.php              # Page d'accueil principale
